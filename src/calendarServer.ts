@@ -2,6 +2,8 @@ import axios from "axios";
 import { DateTime } from "luxon";
 import { ItemDto } from "./entities/Item";
 
+const TOKEN = "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM0OThkNzA5LWZhMTAtNGRiMy04YmZjLWQxNDNkZWI2YzZlZSIsImVtYWlsIjoidXNlcjFAdXNlci5jb20iLCJzdWIiOiJjNDk4ZDcwOS1mYTEwLTRkYjMtOGJmYy1kMTQzZGViNmM2ZWUiLCJqdGkiOiJhZjhjY2NiZS1jNDUwLTQ1ZDUtYjI0Ni01YWVmMWJhZmIyMmEiLCJuYmYiOjE2NDU1MzQzODcsImV4cCI6MTY0NjEzOTE4NywiaWF0IjoxNjQ1NTM0Mzg3fQ.74Df4_1wY7k90RCURroX6kJDOasrSXeKD1Bvr7ZvZbM";
+
 type Items = {
     dueDate: Date,
     todoItems: ItemDto[]
@@ -9,8 +11,8 @@ type Items = {
 
 const getItemsByInterval = (startDate: DateTime, endDate: DateTime) => {
     return axios.get<Items[]>(
-        `https://localhost:44301/Items?startDate=${startDate.toUTC().toISO()}&endDate=${endDate.toUTC().toISO()}`, 
-            {headers: {"authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImU0OWFlODcwLTg0MjEtNDUzMS04ZWM1LTBmMzE3Yzk5YjQzYiIsImVtYWlsIjoidXNlcjFAdXNlci5jb20iLCJzdWIiOiJlNDlhZTg3MC04NDIxLTQ1MzEtOGVjNS0wZjMxN2M5OWI0M2IiLCJqdGkiOiJmM2UzODcxMC04NDMwLTQ5YTgtYmFkOS1jMDcxODcyMTRhZTYiLCJuYmYiOjE2NDUzOTc4NjAsImV4cCI6MTY0NjAwMjY2MCwiaWF0IjoxNjQ1Mzk3ODYwfQ.Y9pNTEJi3EvBuN8UpXaTyQ1vyutFkSZJ5eRNlcDRs-Q"}})
+        `https://localhost:5001/Items?startDate=${startDate.toUTC().toISO()}&endDate=${endDate.toUTC().toISO()}`, 
+            {headers: {"authorization": TOKEN}})
 }
 
 type UpdateItemRequest = {
@@ -21,14 +23,14 @@ type UpdateItemRequest = {
 }
 const addItem = (item: UpdateItemRequest) => {
     return axios.post(
-        `https://localhost:44301/Items`, item,
-            {headers: {"authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImU0OWFlODcwLTg0MjEtNDUzMS04ZWM1LTBmMzE3Yzk5YjQzYiIsImVtYWlsIjoidXNlcjFAdXNlci5jb20iLCJzdWIiOiJlNDlhZTg3MC04NDIxLTQ1MzEtOGVjNS0wZjMxN2M5OWI0M2IiLCJqdGkiOiJmM2UzODcxMC04NDMwLTQ5YTgtYmFkOS1jMDcxODcyMTRhZTYiLCJuYmYiOjE2NDUzOTc4NjAsImV4cCI6MTY0NjAwMjY2MCwiaWF0IjoxNjQ1Mzk3ODYwfQ.Y9pNTEJi3EvBuN8UpXaTyQ1vyutFkSZJ5eRNlcDRs-Q"}})
+        `https://localhost:5001/Items`, item,
+            {headers: {"authorization": TOKEN}})
 }
 
 const updateItem = (id: number, item: UpdateItemRequest) => {
     return axios.put(
-        `https://localhost:44301/Items/${id}`, item,
-            {headers: {"authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImU0OWFlODcwLTg0MjEtNDUzMS04ZWM1LTBmMzE3Yzk5YjQzYiIsImVtYWlsIjoidXNlcjFAdXNlci5jb20iLCJzdWIiOiJlNDlhZTg3MC04NDIxLTQ1MzEtOGVjNS0wZjMxN2M5OWI0M2IiLCJqdGkiOiJmM2UzODcxMC04NDMwLTQ5YTgtYmFkOS1jMDcxODcyMTRhZTYiLCJuYmYiOjE2NDUzOTc4NjAsImV4cCI6MTY0NjAwMjY2MCwiaWF0IjoxNjQ1Mzk3ODYwfQ.Y9pNTEJi3EvBuN8UpXaTyQ1vyutFkSZJ5eRNlcDRs-Q"}})
+        `https://localhost:5001/Items/${id}`, item,
+            {headers: {"authorization": TOKEN}})
 }
 
 export {

@@ -9,50 +9,64 @@ import { ItemDto } from "../entities/Item";
 const List = () => {
     const [selectedYear, setSelectedYear] = useState(DateTime.now().year)
     const [selectedMonth, setSelectedMonth] = useState(DateTime.now().month as number);
-    const [selectedWeek, setSelectedWeek] = useState<number>(0);
-    const lastWeekRef = useRef<boolean>(false);
+    const weeks = useCalendar(selectedMonth, selectedYear);
+    const [selectedWeek, setSelectedWeek] = useState<number>(currentWeek);
+    const [lastWeek, setLastWeek] = useState(false)
     
 
-    let weeks = useCalendar(selectedMonth, selectedYear);
-    const [itemsState, updateState] = useFetchItems(weeks[selectedWeek].start, weeks[selectedWeek].end)
+    
+    const [itemsState, updateState] = useFetchItems(weeks, selectedWeek)
     const handleSelectMonth = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        setLastWeek(false);
         setSelectedMonth(Number.parseInt(e.target.value));
         setSelectedWeek(0);
     }
 
+    function currentWeek() {
+        const index = weeks.findIndex((interval) => (
+            interval.start < DateTime.now() && interval.end > DateTime.now()
+        ) )
+        if(index >= 0) {
+            return index;
+        }
+        else { return 0 }
+    }
+
     const handlePreviousWeek = () => {
         if(selectedWeek > 0) {
-            lastWeekRef.current = false;
+            setLastWeek(false);
             setSelectedWeek(prev => prev - 1);
         }
         else if(selectedMonth > 1){
             setSelectedMonth(prev => prev - 1);
-            lastWeekRef.current = true;
+            setLastWeek(true);
         }
         else {
             setSelectedYear(prev => prev - 1);
             setSelectedMonth(12);
-            lastWeekRef.current = true;
+            setLastWeek(true);
         }
         
     }
 
     useEffect(() => {
-        if(lastWeekRef.current) {
+        if(lastWeek) {
             setSelectedWeek(weeks.length - 1);
-            lastWeekRef.current = false;
         }
-    }, [selectedWeek, weeks.length])
+    }, [lastWeek, weeks.length])
 
     const handleNextWeek = () => {
         if(selectedWeek < weeks.length - 1) {
-            setSelectedWeek(prev => prev + 1)
+            setLastWeek(false);
+            setSelectedWeek(prev => prev + 1);
         }
         else if(selectedMonth < 12){
+            setLastWeek(false);
             setSelectedMonth(prev => prev + 1);
-            setSelectedWeek(0)
+            setSelectedWeek(0);
         }
         else {
+            setLastWeek(false);
             setSelectedYear(prev => prev + 1);
             setSelectedMonth(1);
             setSelectedWeek(0);
@@ -62,10 +76,12 @@ const List = () => {
 
     const handlePreviousYear = () => {
         if(selectedYear > 0) {
+            setLastWeek(false);
             setSelectedYear(prev => prev - 1);
         }
     }
     const handleNextYear = () => {
+        setLastWeek(false);
         setSelectedYear(prev => prev + 1);
         setSelectedMonth(prev => prev);
     }
@@ -176,6 +192,7 @@ const List = () => {
                     </button>
                 </div>
             </div>
+            {itemsState.loading && 'Loading...'}
             {itemsState.data && itemsState.data.map((day, dayIndex) => (
                 <div className="day-container" key={dayIndex}>
                 <div className="day">
@@ -199,6 +216,7 @@ const List = () => {
             </div>
             )               
             )}
+            {itemsState.data &&
             <div className="page-footer">
                 <button className="add-btn" onClick={e => handlePreviousWeek()}>
                     <i className="fas fa-chevron-left"></i>
@@ -218,6 +236,7 @@ const List = () => {
                     <i className="fas fa-chevron-right"></i>
                 </button>
             </div>
+            }
         </div>
     )
 }

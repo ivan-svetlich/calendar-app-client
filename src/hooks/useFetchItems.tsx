@@ -33,14 +33,20 @@ function fetchItemsReducer<ItemsState>(state: ItemsState, action: ACTION) {
   }
 };
 
-export const useFetchItems = (startDate: DateTime, endDate: DateTime)
+type Week = {
+    start: DateTime,
+    end: DateTime
+}
+
+export const useFetchItems = (weeks: Week[], index: number)
     : [ItemsState, (itemDto: ItemDto, index: number, replace?: boolean) => void] => {
     const [state, dispatch] = useReducer(fetchItemsReducer, initialState);
 
     useEffect(() => {
-            fetchItems(startDate, endDate, dispatch);
-
-    }, [endDate, startDate])
+      if(weeks.length > index) {
+        fetchItems(weeks[index].start, weeks[index].end, dispatch);
+      }      
+    }, [index, weeks])
 
     const updateState = (itemDto: ItemDto, index: number, replace: boolean = false) => {
       let updatedState = {...(state as ItemsState)};
