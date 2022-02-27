@@ -31,9 +31,10 @@
   align-items: center;
   justify-content: flex-start;
   font-size: calc(10px + 2vmin);
-  background-image:url('../public/wood-texture.jpg');
+  background-image:url('./components/background.jpg');
   background-attachment:fixed;
-  background-repeat: repeat;
+  background-size: cover;       
+  background-repeat: no-repeat;
 }
 
 .App-link {
