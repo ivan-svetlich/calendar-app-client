@@ -1,4 +1,5 @@
 import React from "react";
+import $ from "jquery"
 import { DateTime } from "luxon";
 import { useState } from "react";
 import { Items } from "../hooks/useFetchItems";
@@ -34,18 +35,36 @@ const CalendarEntries = ({
           id={`${weekday}`}
           type="button"
           className="add-btn"
-          onClick={(e) => handleAddItem(e, dueDate, inputs, setInputs)}
+          onClick={(e) => {
+            handleAddItem(e, dueDate, inputs, setInputs);
+            const input = document.getElementById(`${weekday}-input`);
+            if (input) {
+              input.classList.remove('max-length');
+            }
+          }}
         >
-          +
+          <i className="fas fa-plus" />
         </button>
         <div className="todo-description">
           <input
+            id={`${weekday}-input`}
             className="add-input"
             value={inputs[weekday]}
+            placeholder="New entry..."
+            maxLength={255}
             onChange={(e) =>
               setInputs((prev) =>
                 prev.map((content, index) => {
                   if (index === weekday) {
+                    const input = document.getElementById(`${weekday}-input`);
+                    if (input) {
+                      if (e.target.value.length === 255) {
+                      input.classList.add('max-length');
+                      }
+                      else {
+                        input.classList.remove('max-length');
+                      }
+                    }
                     return e.target.value;
                   } else {
                     return content;
@@ -54,6 +73,15 @@ const CalendarEntries = ({
               )
             }
           />
+        </div>
+        <div>
+          <button
+            className="remove-btn invisible"
+            disabled={true}
+            id={`${weekday}-remove`}
+          >
+            <i className="icon fas fa-trash" />
+          </button>
         </div>
       </div>
     );
@@ -75,9 +103,10 @@ const CalendarEntries = ({
     <div className="calendar-entries">
       {entries &&
         entries.map((day, dayIndex) => (
-          <div className="day-container" key={dayIndex}>
+          <div className={"day-container"} key={dayIndex}>
             <div className="day">
-              <span>
+              <span className={!isPreviousMonth(day.dueDate) ?
+                "bold" : ""}>
                 {`${
                   DateTime.fromISO(day.dueDate.toString(), { zone: "utc" })
                     .weekdayLong
@@ -85,14 +114,14 @@ const CalendarEntries = ({
                   DateTime.fromISO(day.dueDate.toString(), { zone: "utc" }).day
                 }`}
               </span>
-              {isPreviousMonth(day.dueDate) && (
+              {/* {isPreviousMonth(day.dueDate) && (
                 <span className="prev-month">
                   {`( ${
                     DateTime.fromISO(day.dueDate.toString(), { zone: "utc" })
                       .monthLong
                   } )`}
                 </span>
-              )}
+              )} */}
             </div>
             <div className="daily-entries">
               {day.todoItems &&

@@ -23,7 +23,7 @@ const Calendar = () => {
   ) => {
     const weekday = Number.parseInt(e.currentTarget.id);
     const description = inputs[weekday];
-    if (description) {
+    if (description && description.length <= 255) {
       server
         .addItem({ description, completed: false, removed: false, dueDate })
         .then((response) => {
@@ -38,6 +38,19 @@ const Calendar = () => {
             })
           );
         });
+    }
+    else if (description.length > 255) {
+      const input = document.getElementById(`${weekday}-input`);
+      if (input) {
+        input.setAttribute('placeholder', 'max length: 255 characters');
+        input.setAttribute('value', '');
+      }
+    }
+    else {
+      const input = document.getElementById(`${weekday}-input`);
+      if (input) {
+        input.focus();
+      }
     }
   };
 
