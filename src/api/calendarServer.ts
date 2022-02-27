@@ -4,9 +4,6 @@ import { getCookie } from "../services/cookies/cookies";
 import { ItemDto } from "../types/Item";
 import { UserDto } from "../types/User";
 
-const TOKEN =
-  "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImM0OThkNzA5LWZhMTAtNGRiMy04YmZjLWQxNDNkZWI2YzZlZSIsImVtYWlsIjoidXNlcjFAdXNlci5jb20iLCJzdWIiOiJjNDk4ZDcwOS1mYTEwLTRkYjMtOGJmYy1kMTQzZGViNmM2ZWUiLCJqdGkiOiJhZjhjY2NiZS1jNDUwLTQ1ZDUtYjI0Ni01YWVmMWJhZmIyMmEiLCJuYmYiOjE2NDU1MzQzODcsImV4cCI6MTY0NjEzOTE4NywiaWF0IjoxNjQ1NTM0Mzg3fQ.74Df4_1wY7k90RCURroX6kJDOasrSXeKD1Bvr7ZvZbM";
-
 type Items = {
   dueDate: Date;
   todoItems: ItemDto[];
