@@ -1,0 +1,17 @@
+.app-navbar {
+    width: 100%;
+    background-color: transparent !important;
+    justify-content: right;
+}
+
+#dropdown-btn {
+    color: #675d54;
+    background-color: #faf7f2 !important;
+    margin: 1em 1em 0 0;
+}
+
+.nav-menu {
+    background-color: #faf7f2 !important;
+    width: 20%;
+    height: 50%;
+}
