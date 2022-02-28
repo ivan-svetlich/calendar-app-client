@@ -2,6 +2,7 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import server, { LoginArgs } from "../../api/calendarServer";
 import { setCookie } from "../../services/cookies/cookies";
 import User from "../../types/User";
+import { setMessage } from "./messageSlice";
 
 export interface UserState {
   loading: boolean;
@@ -31,11 +32,12 @@ export const login = createAsyncThunk<
     };
     return user;
   } catch (error: any) {
-    return error.response.data;
+
+    return thunkAPI.rejectWithValue(error.response.data);
   }
 });
 
-export const loginSlice = createSlice({
+export const userSlice = createSlice({
   name: "login",
   initialState,
   reducers: {},
@@ -68,4 +70,4 @@ export const logout = () => {
   };
 };
 
-export default loginSlice.reducer;
+export default userSlice.reducer;
