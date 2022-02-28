@@ -1,10 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { LoginArgs } from "../api/calendarServer";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { login, UserState } from "../store/slices/userSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { LoginArgs } from "../../api/calendarServer";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { clearMessage } from "../../store/slices/messageSlice";
+import { login, UserState } from "../../store/slices/userSlice";
 import "./loginStyles.css";
 
 const Login = () => {
@@ -29,6 +30,10 @@ const Login = () => {
       navigate("/calendar");
     }
   }, [data]);
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [])
 
   return (
     <div id="login-page">
@@ -62,7 +67,7 @@ const Login = () => {
         </form>
       )}
       <div className="new-user">
-        New to PLANNER? <a href="/signup">Create an account. </a>
+        New to PLANNER? <Link to="/signup">Create an account. </Link>
       </div>
     </div>
   );

@@ -1,10 +1,10 @@
 import React from "react";
 import { DateTime } from "luxon";
 import { useEffect, useState } from "react";
-import useCalendar from "../hooks/useCalendar";
-import WeekInterval from "../types/WeekInterval";
+import useCalendar from "../../../hooks/useCalendar";
+import WeekInterval from "../../../types/WeekInterval";
 import { useNavigate } from "react-router-dom";
-import useQuery from "../hooks/useQuery";
+import useQuery from "../../../hooks/useQuery";
 type DatePickerProps = {
   setWeek: React.Dispatch<React.SetStateAction<WeekInterval | undefined>>;
 };
@@ -82,18 +82,42 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
 
   useEffect(() => {
     if (today) {
+      const now = DateTime.now();
       if (
-        weeks[0].end.year === DateTime.now().year &&
-        weeks[0].end.month === (DateTime.now().month as number)
+        (now.day < 15 && 
+        weeks[0].end.year === now.year &&
+        weeks[0].end.month === now.month as number
+        ) || 
+        (now.day > 15 && 
+        weeks[0].start.year === now.year &&
+        weeks[0].start.month === now.month as number
+        )
       ) {
         setToday(false);
         setSelectedDate((prev) => ({ ...prev, week: currentWeek() }));
       } else {
-        setSelectedDate((prev) => ({
+        if (currentWeek() === -1 && now.month < 12) {
+          setSelectedDate((prev) => ({
+          ...prev,
+          year: DateTime.now().year,
+          month: DateTime.now().month as number + 1,
+        }));
+        }
+        else if (currentWeek() === -1) {
+          setSelectedDate((prev) => ({
+          ...prev,
+          year: DateTime.now().year + 1,
+          month: DateTime.now().month as number,
+        }));
+        }
+        else {
+          setSelectedDate((prev) => ({
           ...prev,
           year: DateTime.now().year,
           month: DateTime.now().month as number,
         }));
+        }
+        
       }
     }
     function currentWeek() {
@@ -104,7 +128,7 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
       if (index >= 0) {
         return index;
       } else {
-        return 1;
+        return -1;
       }
     }
   }, [selectedDate.month, selectedDate.year, today, weeks]);

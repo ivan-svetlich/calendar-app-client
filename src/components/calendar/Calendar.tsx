@@ -1,19 +1,22 @@
 import "./calendarStyles.css";
-import React, { useState } from "react";
-import useFetchItems from "../hooks/useFetchItems";
-import server from "../api/calendarServer";
-import { ItemDto } from "../types/Item";
-import WeekInterval from "../types/WeekInterval";
-import DatePicker from "./DatePicker";
-import CalendarEntries from "./CalendarEntries";
-import { useAppSelector } from "../store/hooks";
-import User from "../types/User";
-import Header from "./Header";
+import React, { useEffect, useState } from "react";
+import useFetchItems from "../../hooks/useFetchItems";
+import server from "../../api/calendarServer";
+import { ItemDto } from "../../types/Item";
+import WeekInterval from "../../types/WeekInterval";
+import DatePicker from "./datePicker/DatePicker";
+import CalendarEntries from "./calendarEntries/CalendarEntries";
+import { useAppSelector } from "../../store/hooks";
+import User from "../../types/User";
+import Header from "./calendarHeader/Header";
+import { useDispatch } from "react-redux";
+import { clearMessage } from "../../store/slices/messageSlice";
 
 const Calendar = () => {
   const [week, setWeek] = useState<WeekInterval>();
   const [itemsState, updateState] = useFetchItems(week);
   const user: User | null = useAppSelector((state) => state.user.data);
+  const dispatch = useDispatch();
 
   const handleAddItem = (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
@@ -89,6 +92,16 @@ const Calendar = () => {
       }
     });
   };
+
+  useEffect(() => {
+    const calendar = document.getElementById('list-container');
+
+    if(calendar) {
+      calendar.classList.add('is-visible')
+    }
+
+    dispatch(clearMessage());
+  })
 
   return (
     <div id="list-container">

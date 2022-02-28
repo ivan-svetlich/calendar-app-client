@@ -1,18 +1,18 @@
-#login-page {
+#signup-page {
   display: flex;
   flex-direction: column;
   align-items: center;
   margin: auto;
   width: fit-content;
   height: fit-content;
-  margin: 2em 0 2em 0;
+  margin: 0.5em 0 auto 0;
   background-color: #faf7f2;
   padding: 1em 2em 2em 2em;
   color: #675d54;
   border: 2px solid #675d54;
 }
 
-.login-title {
+.signup-title {
   margin-bottom: 1em;
 }
 
@@ -30,7 +30,6 @@
   background-color: #eceae9;
   color: #675d54;
   font: 19px "Delius", serif;
-  margin-top: 0.5em;
 }
 
 .submit-btn {

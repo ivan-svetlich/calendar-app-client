@@ -52,7 +52,7 @@ async function signupAsync(
       dispatch({ type: "SUCCESS", payload: response.data });
     });
   } catch (error: any) {
-    dispatch({ type: "FAILURE", payload: error });
+    dispatch({ type: "FAILURE", payload: error.response.data });
   }
 }
 

@@ -1,8 +1,8 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { logout } from "../store/slices/userSlice";
-import User from "../types/User";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
+import { logout } from "../../../store/slices/userSlice";
+import User from "../../../types/User";
 import "./headerStyles.css";
 
 const Header = () => {

@@ -2,8 +2,8 @@ import React from "react";
 import $ from "jquery"
 import { DateTime } from "luxon";
 import { useState } from "react";
-import { Items } from "../hooks/useFetchItems";
-import { ItemDto } from "../types/Item";
+import { Items } from "../../../hooks/useFetchItems";
+import { ItemDto } from "../../../types/Item";
 
 type CalendarEntriesProps = {
   entries: Items[];
@@ -114,14 +114,6 @@ const CalendarEntries = ({
                   DateTime.fromISO(day.dueDate.toString(), { zone: "utc" }).day
                 }`}
               </span>
-              {/* {isPreviousMonth(day.dueDate) && (
-                <span className="prev-month">
-                  {`( ${
-                    DateTime.fromISO(day.dueDate.toString(), { zone: "utc" })
-                      .monthLong
-                  } )`}
-                </span>
-              )} */}
             </div>
             <div className="daily-entries">
               {day.todoItems &&

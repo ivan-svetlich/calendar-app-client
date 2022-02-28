@@ -1,7 +1,9 @@
 .app-navbar {
-    width: 100%;
+    width: fit-content;
+    display:block;
     background-color: transparent !important;
-    justify-content: right;
+    margin-left: auto;
+    margin-right: 0.25em;
 }
 
 #dropdown-btn {

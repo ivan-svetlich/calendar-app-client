@@ -1,11 +1,11 @@
 import React from "react";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import { LoginArgs, SignupArgs } from "../api/calendarServer";
-import useSignup from "../hooks/useSignup";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { login, UserState } from "../store/slices/userSlice";
+import { Link, useNavigate } from "react-router-dom";
+import { LoginArgs, SignupArgs } from "../../api/calendarServer";
+import useSignup from "../../hooks/useSignup";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { clearMessage, setMessage } from "../../store/slices/messageSlice";
 import "./signupStyles.css";
 
 const Signup = () => {
@@ -32,6 +32,10 @@ const Signup = () => {
       navigate("/login");
     }
   }, [signupState]);
+
+  useEffect(() => {
+    dispatch(clearMessage());
+  }, [])
 
   return (
     <div id="signup-page">
@@ -75,7 +79,7 @@ const Signup = () => {
         </form>
       )}
       <div className="new-user">
-        Already have an account? <a href="/login">Log in. </a>
+        Already have an account? <Link to="/login">Log in. </Link>
       </div>
     </div>
   );

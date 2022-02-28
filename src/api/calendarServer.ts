@@ -3,6 +3,7 @@ import { DateTime } from "luxon";
 import { getCookie } from "../services/cookies/cookies";
 import { ItemDto } from "../types/Item";
 import { UserDto } from "../types/User";
+import apiClient from "./apiClient";
 
 type Items = {
   dueDate: Date;
@@ -10,7 +11,7 @@ type Items = {
 };
 
 const getItemsByInterval = (startDate: DateTime, endDate: DateTime) => {
-  return axios.get<Items[]>(
+  return apiClient.get<Items[]>(
     `https://localhost:5001/Items?startDate=${startDate
       .toUTC()
       .toISO()}&endDate=${endDate.toUTC().toISO()}`,
@@ -25,19 +26,19 @@ type UpdateItemRequest = {
   dueDate: Date;
 };
 const addItem = (item: UpdateItemRequest) => {
-  return axios.post(`https://localhost:5001/Items`, item, {
+  return apiClient.post(`https://localhost:5001/Items`, item, {
     headers: { authorization: `Bearer ${getCookie("id_token")}` },
   });
 };
 
 const updateItem = (id: number, item: UpdateItemRequest) => {
-  return axios.put(`https://localhost:5001/Items/${id}`, item, {
+  return apiClient.put(`https://localhost:5001/Items/${id}`, item, {
     headers: { authorization: `Bearer ${getCookie("id_token")}` },
   });
 };
 
 const removeItem = (id: number) => {
-  return axios.delete(`https://localhost:5001/Items/${id}`, {
+  return apiClient.delete(`https://localhost:5001/Items/${id}`, {
     headers: { authorization: `Bearer ${getCookie("id_token")}` },
   });
 };
@@ -48,7 +49,7 @@ export type LoginArgs = {
 };
 
 const login = (loginArgs: LoginArgs) => {
-  return axios.post<UserDto>(
+  return apiClient.post<UserDto>(
     `https://localhost:5001/Accounts/Login`,
     loginArgs
   );
@@ -61,7 +62,7 @@ export type SignupArgs = {
 };
 
 const signup = (signupArgs: SignupArgs) => {
-  return axios.post<UserDto>(
+  return apiClient.post<UserDto>(
     `https://localhost:5001/Accounts/signup`,
     signupArgs
   );
