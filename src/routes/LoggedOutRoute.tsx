@@ -5,9 +5,7 @@ import { useAppSelector } from "../store/hooks";
 export type ProtectedRouteProps = {} & RouteProps;
 
 function LoggedOutRoute({ children }: ProtectedRouteProps) {
-  const isLoggedIn: boolean = !!useAppSelector(
-    (state) => state.user.data
-  );
+  const isLoggedIn: boolean = !!useAppSelector((state) => state.user.data);
 
   return <> {!isLoggedIn ? children : <Navigate to={`/calendar`} />} </>;
 }

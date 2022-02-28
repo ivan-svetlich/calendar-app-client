@@ -1,15 +1,15 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface MessageState {
-  content: string | null
+  content: string | null;
 }
 
 const initialState: MessageState = {
-  content: null
+  content: null,
 };
 
 export const messageSlice = createSlice({
-  name: 'counter',
+  name: "counter",
   // `createSlice` will infer the state type from the `initialState` argument
   initialState,
   reducers: {
@@ -20,7 +20,7 @@ export const messageSlice = createSlice({
       state.content = null;
     },
   },
-})
+});
 
 export const { setMessage, clearMessage } = messageSlice.actions;
 export default messageSlice.reducer;

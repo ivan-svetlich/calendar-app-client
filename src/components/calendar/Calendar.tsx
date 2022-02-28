@@ -41,15 +41,13 @@ const Calendar = () => {
             })
           );
         });
-    }
-    else if (description.length > 255) {
+    } else if (description.length > 255) {
       const input = document.getElementById(`${weekday}-input`);
       if (input) {
-        input.setAttribute('placeholder', 'max length: 255 characters');
-        input.setAttribute('value', '');
+        input.setAttribute("placeholder", "max length: 255 characters");
+        input.setAttribute("value", "");
       }
-    }
-    else {
+    } else {
       const input = document.getElementById(`${weekday}-input`);
       if (input) {
         input.focus();
@@ -94,14 +92,14 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    const calendar = document.getElementById('list-container');
+    const calendar = document.getElementById("list-container");
 
-    if(calendar) {
-      calendar.classList.add('is-visible')
+    if (calendar) {
+      calendar.classList.add("is-visible");
     }
 
     dispatch(clearMessage());
-  })
+  });
 
   return (
     <div id="list-container">

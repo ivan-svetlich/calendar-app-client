@@ -32,7 +32,6 @@ export const login = createAsyncThunk<
     };
     return user;
   } catch (error: any) {
-
     return thunkAPI.rejectWithValue(error.response.data);
   }
 });

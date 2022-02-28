@@ -1,5 +1,5 @@
 import React from "react";
-import $ from "jquery"
+import $ from "jquery";
 import { DateTime } from "luxon";
 import { useState } from "react";
 import { Items } from "../../../hooks/useFetchItems";
@@ -39,7 +39,7 @@ const CalendarEntries = ({
             handleAddItem(e, dueDate, inputs, setInputs);
             const input = document.getElementById(`${weekday}-input`);
             if (input) {
-              input.classList.remove('max-length');
+              input.classList.remove("max-length");
             }
           }}
         >
@@ -59,10 +59,9 @@ const CalendarEntries = ({
                     const input = document.getElementById(`${weekday}-input`);
                     if (input) {
                       if (e.target.value.length === 255) {
-                      input.classList.add('max-length');
-                      }
-                      else {
-                        input.classList.remove('max-length');
+                        input.classList.add("max-length");
+                      } else {
+                        input.classList.remove("max-length");
                       }
                     }
                     return e.target.value;
@@ -105,8 +104,7 @@ const CalendarEntries = ({
         entries.map((day, dayIndex) => (
           <div className={"day-container"} key={dayIndex}>
             <div className="day">
-              <span className={!isPreviousMonth(day.dueDate) ?
-                "bold" : ""}>
+              <span className={!isPreviousMonth(day.dueDate) ? "bold" : ""}>
                 {`${
                   DateTime.fromISO(day.dueDate.toString(), { zone: "utc" })
                     .weekdayLong

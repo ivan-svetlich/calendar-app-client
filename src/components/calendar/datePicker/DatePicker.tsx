@@ -84,40 +84,35 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
     if (today) {
       const now = DateTime.now();
       if (
-        (now.day < 15 && 
-        weeks[0].end.year === now.year &&
-        weeks[0].end.month === now.month as number
-        ) || 
-        (now.day > 15 && 
-        weeks[0].start.year === now.year &&
-        weeks[0].start.month === now.month as number
-        )
+        (now.day < 15 &&
+          weeks[0].end.year === now.year &&
+          weeks[0].end.month === (now.month as number)) ||
+        (now.day > 15 &&
+          weeks[0].start.year === now.year &&
+          weeks[0].start.month === (now.month as number))
       ) {
         setToday(false);
         setSelectedDate((prev) => ({ ...prev, week: currentWeek() }));
       } else {
         if (currentWeek() === -1 && now.month < 12) {
           setSelectedDate((prev) => ({
-          ...prev,
-          year: DateTime.now().year,
-          month: DateTime.now().month as number + 1,
-        }));
-        }
-        else if (currentWeek() === -1) {
+            ...prev,
+            year: DateTime.now().year,
+            month: (DateTime.now().month as number) + 1,
+          }));
+        } else if (currentWeek() === -1) {
           setSelectedDate((prev) => ({
-          ...prev,
-          year: DateTime.now().year + 1,
-          month: DateTime.now().month as number,
-        }));
-        }
-        else {
+            ...prev,
+            year: DateTime.now().year + 1,
+            month: DateTime.now().month as number,
+          }));
+        } else {
           setSelectedDate((prev) => ({
-          ...prev,
-          year: DateTime.now().year,
-          month: DateTime.now().month as number,
-        }));
+            ...prev,
+            year: DateTime.now().year,
+            month: DateTime.now().month as number,
+          }));
         }
-        
       }
     }
     function currentWeek() {

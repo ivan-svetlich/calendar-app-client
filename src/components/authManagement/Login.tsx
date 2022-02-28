@@ -33,7 +33,7 @@ const Login = () => {
 
   useEffect(() => {
     dispatch(clearMessage());
-  }, [])
+  }, []);
 
   return (
     <div id="login-page">

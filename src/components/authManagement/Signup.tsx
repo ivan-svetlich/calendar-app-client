@@ -35,7 +35,7 @@ const Signup = () => {
 
   useEffect(() => {
     dispatch(clearMessage());
-  }, [])
+  }, []);
 
   return (
     <div id="signup-page">

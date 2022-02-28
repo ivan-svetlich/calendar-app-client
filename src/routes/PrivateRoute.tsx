@@ -5,20 +5,9 @@ import { useAppSelector } from "../store/hooks";
 export type ProtectedRouteProps = {} & RouteProps;
 
 function PrivateRoute({ children }: ProtectedRouteProps) {
-  const isLoggedIn: boolean = !!useAppSelector(
-    (state) => state.user.data
-  );
+  const isLoggedIn: boolean = !!useAppSelector((state) => state.user.data);
 
-  return (
-    <>
-      {" "}
-      {isLoggedIn ? (
-        children
-      ) : (
-        <Navigate to={`/login`} />
-      )}{" "}
-    </>
-  );
+  return <> {isLoggedIn ? children : <Navigate to={`/login`} />} </>;
 }
 
 export default PrivateRoute;

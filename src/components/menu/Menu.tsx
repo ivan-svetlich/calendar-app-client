@@ -27,7 +27,7 @@ const AppNavbar = () => {
       menu.style.width = "150px";
       menu.style.cursor = "default";
     }
-  }
+  };
 
   const closeNav = () => {
     const menu = document.getElementById("mySidenav");
@@ -35,28 +35,51 @@ const AppNavbar = () => {
       menu.style.width = "0";
       menu.style.cursor = "pointer";
     }
-  } 
+  };
 
   return (
     <div className="menu">
-       <div id="mySidenav" className="sidenav">
-        <div className="closebtn" onClick={() => closeNav()}>&times;</div>
-        {user && 
-        <>
-          <Link className="menu-link" to="/calendar" onClick={() => closeNav()}>Calendar</Link>
-          <Link className="menu-link" to="/login" onClick={() => {
-            handleLogout();
-            closeNav();}}>Log out</Link>
-        </>}
-        {!user && 
-        <>
-          <Link className="menu-link" to="/login" onClick={() => closeNav()} >Log in</Link>
-          <Link className="menu-link" to="/Signup" onClick={() => closeNav()}>Sign up</Link>
-        </>}
+      <div id="mySidenav" className="sidenav">
+        <div className="closebtn" onClick={() => closeNav()}>
+          &times;
+        </div>
+        {user && (
+          <>
+            <Link
+              className="menu-link"
+              to="/calendar"
+              onClick={() => closeNav()}
+            >
+              Calendar
+            </Link>
+            <Link
+              className="menu-link"
+              to="/login"
+              onClick={() => {
+                handleLogout();
+                closeNav();
+              }}
+            >
+              Log out
+            </Link>
+          </>
+        )}
+        {!user && (
+          <>
+            <Link className="menu-link" to="/login" onClick={() => closeNav()}>
+              Log in
+            </Link>
+            <Link className="menu-link" to="/Signup" onClick={() => closeNav()}>
+              Sign up
+            </Link>
+          </>
+        )}
       </div>
-      <span onClick={() => openNav()}><i className="fas fa-chevron-right" /></span>
+      <span onClick={() => openNav()}>
+        <i className="fas fa-chevron-right" />
+      </span>
     </div>
-    
+
     // <Navbar bg="light" expand={false} className="app-navbar" sticky="top">
     //   <DropdownButton
     //     title="menu"

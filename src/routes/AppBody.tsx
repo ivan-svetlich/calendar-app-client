@@ -10,20 +10,43 @@ import PrivateRoute from "./PrivateRoute";
 import LoggedOutRoute from "./LoggedOutRoute";
 
 const AppBody = () => {
-  const message: string | null = useAppSelector(state => state.message.content);
+  const message: string | null = useAppSelector(
+    (state) => state.message.content
+  );
 
   return (
     <div className="App-body">
       <Menu />
-      {message && <Message content={message} />}     
+      {message && <Message content={message} />}
       <Routes>
-        <Route path="/calendar" element={<PrivateRoute><Calendar /></PrivateRoute>} />
-        <Route path="/login" element={<LoggedOutRoute><Login /></LoggedOutRoute>} />
-        <Route path="/signup" element={<LoggedOutRoute><Signup /></LoggedOutRoute>} />
+        <Route
+          path="/calendar"
+          element={
+            <PrivateRoute>
+              <Calendar />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/login"
+          element={
+            <LoggedOutRoute>
+              <Login />
+            </LoggedOutRoute>
+          }
+        />
+        <Route
+          path="/signup"
+          element={
+            <LoggedOutRoute>
+              <Signup />
+            </LoggedOutRoute>
+          }
+        />
         <Route path="*" element={<Navigate to="/calendar" />} />
       </Routes>
     </div>
-  )
-}
+  );
+};
 
 export default AppBody;
