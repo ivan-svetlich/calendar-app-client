@@ -2,7 +2,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import server, { LoginArgs } from "../../api/calendarServer";
 import { setCookie } from "../../services/cookies/cookies";
 import User from "../../types/User";
-import { setMessage } from "./messageSlice";
 
 export interface UserState {
   loading: boolean;
@@ -31,6 +30,7 @@ export const login = createAsyncThunk<
       email: response.data.email,
     };
     return user;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (error: any) {
     return thunkAPI.rejectWithValue(error.response.data);
   }
@@ -41,7 +41,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(login.pending, (state, { payload }) => {
+    builder.addCase(login.pending, (state) => {
       state.loading = true;
       state.data = null;
       state.error = null;
@@ -56,7 +56,7 @@ export const userSlice = createSlice({
       state.data = null;
       state.error = action.payload ? action.payload : null;
     });
-    builder.addDefaultCase((state, action) => state);
+    builder.addDefaultCase((state) => state);
   },
 });
 

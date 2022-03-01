@@ -9,6 +9,7 @@ const rootReducer = combineReducers({
   message: messageReducer,
 });
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const appReducer: Reducer<any, any> = (state: RootState, action: AnyAction) => {
   if (action.type === LOGOUT) {
     eraseCookie("id_token");

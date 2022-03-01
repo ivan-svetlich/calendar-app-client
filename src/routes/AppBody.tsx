@@ -1,6 +1,6 @@
-import React, { useEffect } from "react";
-import { Navigate, Route, Routes, useLocation } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import React from "react";
+import { Navigate, Route, Routes } from "react-router-dom";
+import { useAppSelector } from "../store/hooks";
 import Login from "../components/authManagement/Login";
 import Signup from "../components/authManagement/Signup";
 import Calendar from "../components/calendar/Calendar";

@@ -79,30 +79,6 @@ const AppNavbar = () => {
         <i className="fas fa-chevron-right" />
       </span>
     </div>
-
-    // <Navbar bg="light" expand={false} className="app-navbar" sticky="top">
-    //   <DropdownButton
-    //     title="menu"
-    //     variant="secondary"
-    //     id="dropdown-btn"
-    //     align="end"
-    //   >
-    //     {!user && (
-    //       <>
-    //         <Dropdown.Item href="/login">Log In</Dropdown.Item>
-    //         <Dropdown.Item href="/signup">Sign Up</Dropdown.Item>
-    //       </>
-    //     )}
-    //     {user && (
-    //       <>
-    //         <Dropdown.Item href="/calendar">Calendar</Dropdown.Item>
-    //         <Dropdown.Item href="/login" onClick={(e) => handleLogout()}>
-    //           Log Out
-    //         </Dropdown.Item>
-    //       </>
-    //     )}
-    //   </DropdownButton>
-    // </Navbar>
   );
 };
 

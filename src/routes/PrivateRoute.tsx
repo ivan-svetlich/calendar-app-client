@@ -1,11 +1,11 @@
 import React from "react";
-import { Navigate, RouteProps, useLocation } from "react-router-dom";
+import { Navigate, RouteProps } from "react-router-dom";
 import { useAppSelector } from "../store/hooks";
 
-export type ProtectedRouteProps = {} & RouteProps;
+export type ProtectedRouteProps = Record<string, unknown> & RouteProps;
 
 function PrivateRoute({ children }: ProtectedRouteProps) {
-  const isLoggedIn: boolean = !!useAppSelector((state) => state.user.data);
+  const isLoggedIn = !!useAppSelector((state) => state.user.data);
 
   return <> {isLoggedIn ? children : <Navigate to={`/login`} />} </>;
 }

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { DateTime } from "luxon";
 import { getCookie } from "../services/cookies/cookies";
 import { ItemDto } from "../types/Item";

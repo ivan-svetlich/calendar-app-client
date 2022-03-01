@@ -10,7 +10,7 @@ import "./loginStyles.css";
 
 const Login = () => {
   const [inputs, setInputs] = useState<LoginArgs>({ email: "", password: "" });
-  const { loading, data, error }: UserState = useAppSelector(
+  const userState: UserState = useAppSelector(
     (state) => state.user
   );
   const dispatch = useAppDispatch();
@@ -26,19 +26,25 @@ const Login = () => {
     dispatch(login(inputs));
   };
   useEffect(() => {
-    if (data && data.email) {
+    if (userState.data && userState.data.email) {
       navigate("/calendar");
     }
-  }, [data]);
+  }, [userState.data]);
 
   useEffect(() => {
+    const calendar = document.getElementById("login-page");
+
+    if (calendar) {
+      calendar.classList.add("is-visible");
+    }
+
     dispatch(clearMessage());
   }, []);
 
   return (
     <div id="login-page">
-      {loading && "Loading..."}
-      {!loading && (
+      {userState.loading && "Loading..."}
+      {!userState.loading && (
         <form onSubmit={(e) => handleSubmit(e)}>
           <div className="login-title">Log in to Planner</div>
           <div className="email">

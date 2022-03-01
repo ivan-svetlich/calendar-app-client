@@ -4,8 +4,21 @@
   align-items: center;
   margin: auto;
   width: fit-content;
-  height: fit-content;
+  height: 0;
   margin: 0.5em 0 auto 0;
+  transition: 1s;
+
+}
+
+#login-page.is-visible {
+  /* display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+  margin: 0.5em 0 auto 0; */
+  height: fit-content;
   background-color: #faf7f2;
   padding: 1em 2em 2em 2em;
   color: #675d54;
