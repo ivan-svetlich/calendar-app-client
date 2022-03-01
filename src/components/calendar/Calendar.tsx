@@ -6,8 +6,6 @@ import { ItemDto } from "../../types/Item";
 import WeekInterval from "../../types/WeekInterval";
 import DatePicker from "./datePicker/DatePicker";
 import CalendarEntries from "./calendarEntries/CalendarEntries";
-import { useAppSelector } from "../../store/hooks";
-import User from "../../types/User";
 import Header from "./calendarHeader/Header";
 import { useDispatch } from "react-redux";
 import { clearMessage } from "../../store/slices/messageSlice";
@@ -15,7 +13,6 @@ import { clearMessage } from "../../store/slices/messageSlice";
 const Calendar = () => {
   const [week, setWeek] = useState<WeekInterval>();
   const [itemsState, updateState] = useFetchItems(week);
-  const user: User | null = useAppSelector((state) => state.user.data);
   const dispatch = useDispatch();
 
   const handleAddItem = (
@@ -78,7 +75,7 @@ const Calendar = () => {
     const description = document.getElementById(`${id}-description`);
     const removeBtn = document.getElementById(`${id}-remove`);
     const completedBtn = document.getElementById(`${id}-completed`);
-    server.removeItem(id).then((response) => {
+    server.removeItem(id).then(() => {
       if (description) {
         description.classList.add("removed");
       }
@@ -92,7 +89,7 @@ const Calendar = () => {
   };
 
   useEffect(() => {
-    const calendar = document.getElementById("list-container");
+    const calendar = document.getElementById("calendar");
 
     if (calendar) {
       calendar.classList.add("is-visible");
@@ -102,7 +99,7 @@ const Calendar = () => {
   });
 
   return (
-    <div id="list-container">
+    <div id="calendar">
       <Header />
       <DatePicker setWeek={setWeek} />
       {itemsState.loading && "Loading..."}

@@ -1,10 +1,10 @@
-#list-container {
+#calendar {
   width: 80vw;
   height: 0;
   transition: 1s;
 }
 
-.is-visible {
+#calendar.is-visible {
   height: auto !important;
   overflow: hidden;
   min-height: 100vh;
@@ -84,12 +84,12 @@
   .app-header {
     flex-direction: column;
     text-align: left;
-}
-.app-header .user {
-  display: flex;
-  flex-direction: row;
-  vertical-align: middle;
-}
+  }
+  .app-header .user {
+    display: flex;
+    flex-direction: row;
+    vertical-align: middle;
+  }
   .list-date {
   display: flex;
   flex-direction: column;
@@ -104,6 +104,7 @@
   }
   .today-btn, .logout-btn {
     visibility: hidden; 
+    
   } 
 
 
