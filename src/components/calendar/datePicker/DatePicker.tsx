@@ -5,6 +5,7 @@ import useCalendar from "../../../hooks/useCalendar";
 import WeekInterval from "../../../types/WeekInterval";
 import { useNavigate } from "react-router-dom";
 import useQuery from "../../../hooks/useQuery";
+
 type DatePickerProps = {
   setWeek: React.Dispatch<React.SetStateAction<WeekInterval | undefined>>;
 };
@@ -14,7 +15,7 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
     month: number;
     week: number;
   };
-  let query = useQuery();
+  const query = useQuery();
   const [selectedDate, setSelectedDate] = useState<SelectedDate>(() => {
     return {
       year: query.get("year")
@@ -30,19 +31,23 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
   });
   const weeks = useCalendar(selectedDate.month, selectedDate.year);
   const [today, setToday] = useState(!query.get("week"));
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const audio = new Audio('https://www.soundjay.com/misc/sounds/page-flip-01a.mp3');
 
   const handlePreviousYear = () => {
     if (selectedDate.year > 0) {
+      audio.play();
       setSelectedDate((prev) => ({ ...prev, year: prev.year - 1 }));
     }
   };
 
   const handleNextYear = () => {
+    audio.play();
     setSelectedDate((prev) => ({ ...prev, year: prev.year + 1 }));
   };
 
   const handleSelectMonth = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    audio.play();
     setSelectedDate((prev) => ({
       ...prev,
       month: Number.parseInt(e.target.value),
@@ -51,6 +56,7 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
   };
 
   const handlePreviousWeek = () => {
+    audio.play();
     if (selectedDate.week > 0) {
       setSelectedDate((prev) => ({ ...prev, week: prev.week - 1 }));
     } else if (selectedDate.month > 1) {
@@ -66,6 +72,7 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
   };
 
   const handleNextWeek = () => {
+    audio.play();
     if (selectedDate.week < weeks.length - 1) {
       setSelectedDate((prev) => ({ ...prev, week: prev.week + 1 }));
     } else if (selectedDate.month < 12) {
@@ -83,66 +90,70 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
   useEffect(() => {
     if (today) {
       const now = DateTime.now();
-      if (
-        (now.day < 15 &&
-          weeks[0].end.year === now.year &&
-          weeks[0].end.month === (now.month as number)) ||
-        (now.day > 15 &&
-          weeks[0].start.year === now.year &&
-          weeks[0].start.month === (now.month as number))
-      ) {
-        setToday(false);
-        setSelectedDate((prev) => ({ ...prev, week: currentWeek() }));
-      } else {
-        if (currentWeek() === -1 && now.month < 12) {
-          setSelectedDate((prev) => ({
-            ...prev,
-            year: DateTime.now().year,
-            month: (DateTime.now().month as number) + 1,
-          }));
-        } else if (currentWeek() === -1) {
-          setSelectedDate((prev) => ({
-            ...prev,
-            year: DateTime.now().year + 1,
-            month: DateTime.now().month as number,
-          }));
-        } else {
-          setSelectedDate((prev) => ({
-            ...prev,
-            year: DateTime.now().year,
-            month: DateTime.now().month as number,
-          }));
+      if (now.year === selectedDate.year || now.year === weeks[0].start.year) {
+        if (now.month === selectedDate.month || now.month === weeks[0].start.month) {
+          if (currentWeek(now) !== -1) {
+            setToday(false);
+            setSelectedDate((prev) => ({ ...prev, week: currentWeek(now) }));
+          }
+          else {
+            if (now.month === weeks[0].end.month) {
+              if (now.month < 12) {
+                setToday(false);
+                console.log(2)
+                setSelectedDate((prev) => ({ ...prev, month: now.month + 1, week: 0 }));
+              }
+              else {
+                setSelectedDate((prev) => ({ ...prev, year: now.year + 1, month: 1, week: 0 }));
+              }
+            }
+            else {
+              setSelectedDate({ year: now.year, month: now.month, week: -1 });
+            }
+          }
         }
+        else {
+          setSelectedDate((prev) => ({ ...prev, month: now.month, week: -1 }));
+        }  
+      }
+      else {
+        setSelectedDate((prev) => ({ ...prev, year: now.year, month: now.month, week: -1 }));
       }
     }
-    function currentWeek() {
+  
+    function currentWeek(now: DateTime) {
       const index = weeks.findIndex(
         (interval) =>
-          interval.start < DateTime.now() && interval.end > DateTime.now()
+          interval.start < now && interval.end > now
       );
-      if (index >= 0) {
-        return index;
-      } else {
-        return -1;
-      }
+      return index;
     }
-  }, [selectedDate.month, selectedDate.year, today, weeks]);
+  }), [today, selectedDate];
 
   useEffect(() => {
     if (
       selectedDate.year === weeks[0].end.year &&
       selectedDate.month === weeks[0].end.month
     ) {
-      if (selectedDate.week === -1 || selectedDate.week >= weeks.length) {
+      if (!today && (selectedDate.week === -1 || selectedDate.week >= weeks.length)) {
         setSelectedDate((prev) => ({ ...prev, week: weeks.length - 1 }));
       } else {
         setWeek(weeks[selectedDate.week]);
+        if (today) {
+          setToday(false);
+        }
         navigate(
           `?year=${selectedDate.year}&month=${selectedDate.month}&week=${selectedDate.week}`,
           { replace: true }
         );
+        
       }
     }
+    else if (selectedDate.year === weeks[0].start.year &&
+      selectedDate.month === weeks[0].start.month && selectedDate.week !== -1) {
+        setToday(false);
+        setWeek(weeks[selectedDate.week]);
+      }
   }, [selectedDate, setWeek, weeks]);
 
   const months = [
@@ -159,13 +170,6 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
     "November",
     "December",
   ];
-
-  const isPreviousMonth = () => {
-    const currentMonth = weeks[selectedDate.week].start.month;
-    const selectedMonth = selectedDate.month;
-
-    return currentMonth !== selectedMonth;
-  };
 
   return (
     <div className="list-date">
@@ -185,7 +189,7 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
         <button className="add-btn">
           <i
             className="fas fa-chevron-left"
-            onClick={(e) => handlePreviousWeek()}
+            onClick={() => handlePreviousWeek()}
           ></i>
         </button>
         {weeks.length > selectedDate.week && selectedDate.week >= 0 && (
@@ -215,26 +219,21 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
             </span>
           </div>
         )}
-        <button className="add-btn" onClick={(e) => handleNextWeek()}>
+        <button className="add-btn" onClick={() => handleNextWeek()}>
           <i className="fas fa-chevron-right"></i>
         </button>
-        <div>
-          <button onClick={() => setToday(true)} className="today-btn">
-            Today
-          </button>
-        </div>
       </div>
       <div className="year">
         <button className="add-btn">
           <i
             className="fas fa-chevron-left"
-            onClick={(e) => handlePreviousYear()}
+            onClick={() => handlePreviousYear()}
           ></i>
         </button>
         <div className="current-year">
           <span className="week-start">{selectedDate.year}</span>
         </div>
-        <button className="add-btn" onClick={(e) => handleNextYear()}>
+        <button className="add-btn" onClick={() => handleNextYear()}>
           <i className="fas fa-chevron-right"></i>
         </button>
       </div>
