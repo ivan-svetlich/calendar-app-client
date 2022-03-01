@@ -4,8 +4,13 @@
   align-items: center;
   margin: auto;
   width: fit-content;
-  height: fit-content;
+  height: 0;
   margin: 0.5em 0 auto 0;
+  transition: 1s;
+}
+
+#signup-page.is-visible {
+  height: fit-content;
   background-color: #faf7f2;
   padding: 1em 2em 2em 2em;
   color: #675d54;
