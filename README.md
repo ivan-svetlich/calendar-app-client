@@ -19,6 +19,7 @@ Calendar app where users can write down their notes and reminders.
 
 #### Other relevant technologies used:
 * Redux
+* ASP.NET Core Identity
 * JSON Web Tokens (jwt)
 
 ## Appearance
