@@ -14,7 +14,7 @@ Calendar app where users can write down their notes and reminders.
 ### This project was designed with:
 * C# .NET 5
 * TypeScript (version: 4.5.2)
-* React (version: 17.0.2)
+* React.js (version: 17.0.2)
 * MySQL
 
 #### Other relevant technologies used:
