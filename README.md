@@ -32,6 +32,7 @@ Calendar app where users can write down their notes and reminders.
 
 ### Calendar
 Users can navigate the calendar and add their notes.
+
 ![3](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/3.png)
 
 
@@ -47,6 +48,7 @@ Notes marked as completed are crossed out.
 
 ### Removing notes
 Removed notes are shown with less opacity and crossed out by a wavy line, and will dissapear on next page load.
+
 ![7](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/7.png)
 
 
