@@ -31,7 +31,7 @@ Calendar app where users can write down their notes and reminders.
 
 
 ### Calendar
-Users can navigate the calendar and add their notes.
+Users can navigate through the calendar and add their notes.
 
 ![3](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/3.png)
 
