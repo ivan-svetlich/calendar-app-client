@@ -22,7 +22,7 @@ Calendar app where users can write down their notes and reminders.
 * JSON Web Tokens (jwt)
 
 ## Appearance
-### Signup form
+### * Signup form
 ![1](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/1.png)
 
 ### Login form
