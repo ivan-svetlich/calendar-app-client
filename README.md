@@ -1,46 +1,47 @@
-# Getting Started with Create React App
+PLANNER - Calendar App (client)
+This is the client's repository. See the [server repository](https://github.com/ivan-svetlich/CalendarAppServer).
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Table of contents
+* [General Info](#general-info)
+* [Technologies](#technologies)
+* [Appearance](#appearance)
+* [Setup](#setup)
 
-## Available Scripts
+## General Info
+Calendar app where users can write down their notes and reminders. 
 
-In the project directory, you can run:
+## Technologies
+### This project was designed with:
+* C# .NET 5
+* TypeScript (version: 4.5.2)
+* React (version: 17.0.2)
+* MySQL
 
-### `npm start`
+#### Other relevant technologies used:
+* Redux
+* JSON Web Tokens (jwt)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Appearance
+### Signup form
+![1](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/1.png)
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+### Login form
+![2](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/2.png)
 
-### `npm test`
+### Calendar
+Users can navigate the calendar and add their notes.
+![3](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/3.png)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Adding notes
+![4](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/4.png)
 
-### `npm run build`
+### Marking notes as completed
+Notes marked as completed are crossed out.
+![5](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/5.png)
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Removing notes
+Removed notes are shown with less opacity and crossed out by a wavy line, and will dissapear on next page load.
+![7](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/7.png)
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+### Animated Sidbar Menu
+![6](https://github.com/ivan-svetlich/calendar-app-client/blob/master/images/6.png)
