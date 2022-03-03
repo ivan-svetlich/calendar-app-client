@@ -5,7 +5,6 @@ This is the client's repository. Also, take a look at the [server's repository](
 * [General Info](#general-info)
 * [Technologies](#technologies)
 * [Appearance](#appearance)
-* [Setup](#setup)
 
 ## General Info
 Calendar app where users can write down their notes and reminders. 
