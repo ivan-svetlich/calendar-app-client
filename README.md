@@ -7,7 +7,7 @@ This is the client's repository. Also, take a look at the [server's repository](
 * [Appearance](#appearance)
 
 ## General Info
-Calendar app where users can write down their notes and reminders. 
+Calendar app with a realistic design where users can write down their reminders.
 
 ## Technologies
 ### This project was designed with:
