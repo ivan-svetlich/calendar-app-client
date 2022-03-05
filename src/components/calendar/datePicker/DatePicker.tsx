@@ -223,6 +223,11 @@ const DatePicker = ({ setWeek }: DatePickerProps) => {
           <i className="fas fa-chevron-right"></i>
         </button>
       </div>
+      <div className="today-btn-container">
+        <button onClick={() => navigate('calendar')} className="today-btn">
+          Today
+        </button>
+      </div>
       <div className="year">
         <button className="add-btn">
           <i
