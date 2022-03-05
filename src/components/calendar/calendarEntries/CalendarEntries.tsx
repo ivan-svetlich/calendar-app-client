@@ -131,14 +131,14 @@ const CalendarEntries = ({
                       )}
                     </div>
                     <div
-                      className={
-                        item.completed
-                          ? `todo-description completed`
-                          : `todo-description`
-                      }
+                      className={`todo-description`}
                       id={`${item.id}-description`}
                     >
-                      {item.description}
+                      <span id={`${item.id}-content`} className={
+                        item.completed
+                          ? `completed`
+                          : ``
+                      }>{item.description}</span>
                     </div>
                     <div>
                       <button
