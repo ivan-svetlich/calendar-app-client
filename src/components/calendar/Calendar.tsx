@@ -54,7 +54,7 @@ const Calendar = () => {
 
   const handleMarkCompleted = (item: ItemDto, index: number) => {
     const id = item.id;
-    const element = document.getElementById(`${id}-description`);
+    const element = document.getElementById(`${id}-content`);
 
     server
       .updateItem(id, {
