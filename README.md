@@ -18,6 +18,7 @@ Calendar app with a realistic design where users can write down their reminders.
 
 #### Other relevant technologies used:
 * Redux
+* ASP.NET Core Identity
 * JSON Web Tokens (jwt)
 
 ## Appearance
