@@ -7,7 +7,7 @@ This is the client's repository. Also, take a look at the [server's repository](
 * [Appearance](#appearance)
 
 ## General Info
-Calendar app with a realistic design where users can write down their reminders.
+Appointment Book Web App to keep track of important deadlines, special events and more with clear organization.
 
 ## Technologies
 ### This project was designed with:
